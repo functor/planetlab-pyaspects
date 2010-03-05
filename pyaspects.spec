@@ -32,7 +32,6 @@ Aspect Oriented programming library for Python
 
 %build
 rm -rf $RPM_BUILD_ROOT
-make rpm
 
 %install
 python setup.py install  --root $RPM_BUILD_ROOT
