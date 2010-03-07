@@ -7,7 +7,7 @@ SHA1SUM	= sha1sum
 SPECFILE = pyaspects.spec
 
 main.URL	:= http://github.com/downloads/baris/pyaspects/pyaspects-0.2.tar.gz
-main.SHA1SUM    := d43bdaf25bb0f410482b1f017c4cc4e217323428
+main.SHA1SUM    := 0b577003a4e24d8273bf477e360442ac6a5ea27a
 main.FILE	:= $(notdir $(main.URL))
 
 # Thierry - when called from within the build, PWD is /build
