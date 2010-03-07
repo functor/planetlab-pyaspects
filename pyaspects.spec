@@ -4,7 +4,7 @@
 %define url $URL: https://svn.planet-lab.org/svn/pyaspects/trunk/pyaspects.spec $
 
 %define name pyaspects
-%define version 0.1
+%define version 0.2
 %define taglevel 1
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
@@ -15,7 +15,7 @@ Version: %{version}
 Release: %{release}
 License: GPL
 Group: Development/Libraries
-Source0: pyaspects-0.1.tar.gz
+Source0: pyaspects-0.2.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Packager: PlanetLab <devel@planet-lab.org>
