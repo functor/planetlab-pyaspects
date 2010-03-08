@@ -1,32 +1,42 @@
 # $Id$
+# $URL$
+#
+WEBFETCH		:= wget
+SHA1SUM			:= sha1sum
 
-WEBFETCH := wget
-SHA1SUM	= sha1sum
+ALL			+= pyaspects
+pyaspects-URL		:= http://github.com/downloads/baris/pyaspects/pyaspects-0.2.tar.gz
+pyaspects-SHA1SUM	:= 0b577003a4e24d8273bf477e360442ac6a5ea27a
+pyaspects		:= $(notdir $(pyaspects-URL))
 
+all: $(ALL)
+.PHONY: all
+
+##############################
+define download_target
+$(1): $($(1))
+.PHONY: $($(1))
+$($(1)): 
+	@if [ ! -e "$($(1))" ] ; then echo "$(WEBFETCH) $($(1)-URL)" ; $(WEBFETCH) $($(1)-URL) ; fi
+	@if [ ! -e "$($(1))" ] ; then echo "Could not download source file: $($(1)) does not exist" ; exit 1 ; fi
+	@if test "$$$$($(SHA1SUM) $($(1)) | awk '{print $$$$1}')" != "$($(1)-SHA1SUM)" ; then \
+	    echo "sha1sum of the downloaded $($(1)) does not match the one from 'Makefile'" ; \
+	    echo "Local copy: $$$$($(SHA1SUM) $($(1)))" ; \
+	    echo "In Makefile: $($(1)-SHA1SUM)" ; \
+	    false ; \
+	else \
+	    ls -l $($(1)) ; \
+	fi
+endef
+
+$(eval $(call download_target,pyaspects))
+
+sources: $(ALL)
+.PHONY: sources
+
+####################
 # default - overridden by the build
 SPECFILE = pyaspects.spec
-
-main.URL	:= http://github.com/downloads/baris/pyaspects/pyaspects-0.2.tar.gz
-main.SHA1SUM    := 0b577003a4e24d8273bf477e360442ac6a5ea27a
-main.FILE	:= $(notdir $(main.URL))
-
-# Thierry - when called from within the build, PWD is /build
-SOURCEFILES := $(main.FILE)
-
-$(main.FILE): #FORCE
-	@if [ ! -e "$@" ] ; then echo "$(WEBFETCH) $(main.URL)" ; $(WEBFETCH) $(main.URL) ; fi
-	@if [ ! -e "$@" ] ; then echo "Could not download source file: $@ does not exist" ; exit 1 ; fi
-	@if test "$$(sha1sum $@ | awk '{print $$1}')" != "$(main.SHA1SUM)" ; then \
-	    echo "sha1sum of the downloaded $@ does not match the one from 'sources' file" ; \
-	    echo "Local copy: $$(sha1sum $@)" ; \
-	    echo "In sources: $$(grep $@ sources)" ; \
-	    exit 1 ; \
-	else \
-	    ls -l $@ ; \
-	fi
-
-sources: $(SOURCEFILES)
-.PHONY: sources
 
 PWD=$(shell pwd)
 PREPARCH ?= noarch
