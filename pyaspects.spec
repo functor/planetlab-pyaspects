@@ -41,7 +41,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(-,root,root,-)
-%(python -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")/pyaspects
+/usr
 
 %changelog
 * Fri Mar 5 2009 Baris Metin <tmetin@sophia.inria.fr>
