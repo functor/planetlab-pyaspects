@@ -5,8 +5,8 @@ WEBFETCH		:= wget
 SHA1SUM			:= sha1sum
 
 ALL			+= pyaspects
-pyaspects-URL		:= http://build.planet-lab.org/third-party/pyaspects-0.2.tar.gz
-pyaspects-SHA1SUM	:= 0b577003a4e24d8273bf477e360442ac6a5ea27a
+pyaspects-URL		:= http://build.planet-lab.org/third-party/pyaspects-0.3.tar.gz
+pyaspects-SHA1SUM	:= bd3dde2f9dc8250f1c73fa1a7c6ed38d20faffa9
 pyaspects		:= $(notdir $(pyaspects-URL))
 
 all: $(ALL)
