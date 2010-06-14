@@ -5,7 +5,7 @@
 
 %define name pyaspects
 %define version 0.3
-%define taglevel 1
+%define taglevel 2
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -44,5 +44,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr
 
 %changelog
+* Mon Jun 14 2010 Baris Metin <Talip-Baris.Metin@sophia.inria.fr> - pyaspects-0.3-2
+- dummy tag to test module-tools' git support
+
 * Fri Mar 5 2009 Baris Metin <tmetin@sophia.inria.fr>
 - initial package
