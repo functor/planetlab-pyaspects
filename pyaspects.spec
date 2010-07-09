@@ -15,7 +15,7 @@ Version: %{version}
 Release: %{release}
 License: GPL
 Group: Development/Libraries
-Source0: pyaspects-0.3.tar.gz
+Source0: pyaspects-0.4.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Packager: PlanetLab <devel@planet-lab.org>
