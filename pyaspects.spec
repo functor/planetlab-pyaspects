@@ -1,8 +1,3 @@
-#
-# $Id$
-#
-%define url $URL: https://svn.planet-lab.org/svn/pyaspects/trunk/pyaspects.spec $
-
 %define name pyaspects
 %define version 0.4.1
 %define taglevel 0
@@ -20,7 +15,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Packager: PlanetLab <devel@planet-lab.org>
 Distribution: PlanetLab %{plrelease}
-URL: %(echo %{url} | cut -d ' ' -f 2)
+URL: %{SCMURL}
 
 Requires: python
 
