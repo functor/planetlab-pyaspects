@@ -1,13 +1,12 @@
-# $Id$
-# $URL$
 #
 WEBFETCH		:= wget
 SHA1SUM			:= sha1sum
 
 ALL			+= pyaspects
-pyaspects-URL		:= http://build.planet-lab.org/third-party/pyaspects-0.4.1.tar.gz
+pyaspects-URL1		:= http://build.planet-lab.org/third-party/pyaspects-0.4.1.tar.gz
+pyaspects-URL2		:= http://build.onelab.eu/third-party/pyaspects-0.4.1.tar.gz
 pyaspects-SHA1SUM	:= 6b9f0b5711b98ed2a6c6a85713325158de96193a
-pyaspects		:= $(notdir $(pyaspects-URL))
+pyaspects		:= $(notdir $(pyaspects-URL1))
 
 all: $(ALL)
 .PHONY: all
@@ -15,9 +14,11 @@ all: $(ALL)
 ##############################
 define download_target
 $(1): $($(1))
-.PHONY: $($(1))
+.PHONY: $(1)
 $($(1)): 
-	@if [ ! -e "$($(1))" ] ; then echo "$(WEBFETCH) $($(1)-URL)" ; $(WEBFETCH) $($(1)-URL) ; fi
+	@if [ ! -e "$($(1))" ] ; then \
+	{ echo Using primary; echo "$(WEBFETCH) $($(1)-URL1)" ; $(WEBFETCH) $($(1)-URL1) ; } || \
+	{ echo Using secondary; echo "$(WEBFETCH) $($(1)-URL2)" ; $(WEBFETCH) $($(1)-URL2) ; } ; fi
 	@if [ ! -e "$($(1))" ] ; then echo "Could not download source file: $($(1)) does not exist" ; exit 1 ; fi
 	@if test "$$$$($(SHA1SUM) $($(1)) | awk '{print $$$$1}')" != "$($(1)-SHA1SUM)" ; then \
 	    echo "sha1sum of the downloaded $($(1)) does not match the one from 'Makefile'" ; \
@@ -31,7 +32,7 @@ endef
 
 $(eval $(call download_target,pyaspects))
 
-sources: $(ALL)
+sources: $(ALL) 
 .PHONY: sources
 
 ####################
