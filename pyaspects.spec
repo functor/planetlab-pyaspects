@@ -1,6 +1,6 @@
 %define name pyaspects
 %define version 0.4.1
-%define taglevel 1
+%define taglevel 2
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 /usr
 
 %changelog
+* Mon Nov 28 2011 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - pyaspects-0.4.1-2
+- build from dual mirror
+
 * Mon Jan 24 2011 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - pyaspects-0.4.1-1
 - no semantic change - just fixed specfile for git URL
 
