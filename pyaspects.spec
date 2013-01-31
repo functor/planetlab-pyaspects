@@ -4,6 +4,8 @@
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
+%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
+
 Summary: Aspect Oriented programming library for Python
 Name: %{name}
 Version: %{version}
@@ -29,14 +31,14 @@ Aspect Oriented programming library for Python
 rm -rf $RPM_BUILD_ROOT
 
 %install
-python setup.py install  --root $RPM_BUILD_ROOT
+/usr/bin/python setup.py install  --root $RPM_BUILD_ROOT
  
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(-,root,root,-)
-/usr
+%{python_sitelib}/*
 
 %changelog
 * Mon Nov 28 2011 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - pyaspects-0.4.1-2
