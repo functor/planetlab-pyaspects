@@ -1,6 +1,6 @@
 %define name pyaspects
 %define version 0.4.1
-%define taglevel 2
+%define taglevel 3
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -41,6 +41,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitelib}/*
 
 %changelog
+* Thu Feb 21 2013 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - pyaspects-0.4.1-3
+- review specfile to avoid rpm-generated requirements towards /bin/python
+
 * Mon Nov 28 2011 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - pyaspects-0.4.1-2
 - build from dual mirror
 
